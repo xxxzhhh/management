@@ -143,11 +143,17 @@ function chartOptions1() {
             xAxis: {
                 data: x,
             },
-            yAxis: {},
-            color: ['#c38bef', '#6dbcf7'],
+            yAxis: {        
+                type: 'value',
+                inverse: true,
+                axisLine: {
+                  show: false 
+                }
+            },
+            color: ['#red', '#6dbcf7'],
             series: [
                 {
-                    name: '成绩',
+                    name: '排名',
                     type: 'line',
                     data: y,
                     barWidth: '20',
