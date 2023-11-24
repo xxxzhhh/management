@@ -68,6 +68,7 @@ const fetchData = async () => {
         classOptions.value = [];
         examOptions.value = [];
         const suboption = await get('/api/watchclass')
+        examOptions1.value = suboption.exam;
         classOptions.value = suboption.class;
     } catch (error) {
         console.log('获取数据失败', error);
@@ -95,7 +96,7 @@ const handlechange1 = () => {
     if (class_value.value != '') {
         post('/api/watchclass2', { class1: class_value.value }).then((response) => {
             examOptions.value = response.exam;
-            examOptions1.value = response.exam;
+           
         }).catch((err) => {
             console.log(err);
         })
@@ -116,8 +117,6 @@ const hand_search1 = () => {
     }
 }
 const reset = () => {
-    examOptions1.value = [];
-    examOptions.value = [];
     class_value.value = '';
     exam_value.value = '';
     isVisible.value = false;
