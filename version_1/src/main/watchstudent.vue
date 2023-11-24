@@ -114,56 +114,81 @@ function chartOptions() {
 
 }
 function chartOptions1() {
-    if (myChart2.value) {
-        myChart2.value.clear();
-    }
-    const x = examsrank.value.map(item => item.name);
-    const y = examsrank.value.map(item => item.rank);
-    setTimeout(function () {
-        myChart2.value = echarts.init(lineChart1.value!);
-        myChart2.value.setOption({
-            title: {
-                text: `${input1.value}的历次成绩排名`,
-                x: 'center'
-            },
-            tooltip: {
-                trigger: 'item'
-            },
-            legend: {
-                data: ['排名'],
-                orient: 'vertical',
-                right: 60,
-                top: 20
-            },
-            xAxis: {
-                data: x,
-                axisLine: {
-                    show: false
-                }
-            },
-            yAxis: {
-                type: 'value',
-                inverse: true,
-                axisLine: {
-                    show: false
-                }
-            },
-            color: ['red', '#6dbcf7'],
-            series: [
-                {
-                    name: '排名',
-                    type: 'line',
-                    data: y,
-                    barWidth: '20',
-                    label: {
-                        show: true,
-                        position: 'top'
-                    }
-                }
-            ]
-        });
-    }, 100);
-
+  if (myChart2.value) {
+    myChart2.value.clear();
+  }
+  const x = examsrank.value.map(item => item.name);
+  const y1 = examsrank.value.map(item => item.rank);
+  const y2 = examsrank.value.map(item => item.rank1); // 添加第二组数值
+  setTimeout(function () {
+    myChart2.value = echarts.init(lineChart1.value!);
+    myChart2.value.setOption({
+      title: {
+        text: `${input1.value}的历次成绩排名`,
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        data: ['班级排名','年级排名'],
+        orient: 'vertical',
+        right: 60,
+        top: 20
+      },
+      xAxis: {
+        data: x,
+        axisLine: {
+          show: false
+        }
+      },
+      yAxis: [
+        {
+          type: 'value',
+          inverse: true,
+          axisLine: {
+            show: false
+          },
+          axisLabel: {
+            formatter: '{value}' // 显示第一组数值
+          }
+        },
+        {
+          type: 'value',
+          inverse: true,
+          axisLine: {
+            show: false
+          },
+          axisLabel: {
+            formatter: '{value}' // 显示第二组数值
+          }
+        }
+      ],
+      color: ['yellow', 'red'],
+      series: [
+        {
+          name: '班级排名',
+          type: 'line',
+          data: y1,
+          barWidth: '20',
+          label: {
+            show: true,
+            position: 'top'
+          }
+        },
+        {
+          name: '年级排名',
+          type: 'line',
+          data: y2,
+          barWidth: '20',
+          label: {
+            show: true,
+            position: 'top'
+          }
+        }
+      ]
+    });
+  }, 100);
 }
 </script>
     
